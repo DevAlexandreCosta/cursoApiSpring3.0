@@ -1,10 +1,7 @@
-package com.devalexandrecosta;
+package com.devalexandrecosta.controller;
 
 import java.util.List;
 
-import javax.print.attribute.standard.MediaTray;
-
-import org.apache.tomcat.util.http.parser.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,10 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.devalexandrecosta.model.Person;
+import com.devalexandrecosta.data.vo.v1.PersonVO;
 import com.devalexandrecosta.services.PersonServices;
 
 @RestController
@@ -30,13 +26,13 @@ public class PersonContoller {
 	// sem usar @service private PersonServices services = new PersonServices();
 
 	@GetMapping(produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
-	public  List<Person> findAll()  {
+	public  List<PersonVO> findAll()  {
 		return service.findAll();
 	}
 		
 	@GetMapping(value= "/{id}",
 				produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
-		public Person findById(
+		public PersonVO findById(
 				@PathVariable(value = "id") Long id)  {
 			return service.findById(id);
 //		
@@ -52,14 +48,14 @@ public class PersonContoller {
 		
 		@PostMapping( consumes  = org.springframework.http.MediaType.APPLICATION_JSON_VALUE,
 				produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
-		public Person create(@RequestBody Person person)  {
+		public PersonVO create(@RequestBody PersonVO person)  {
 			return service.create(person);
 //		
 	}
 		
 		@PutMapping(consumes  = org.springframework.http.MediaType.APPLICATION_JSON_VALUE,
 				produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
-		public Person update(@RequestBody Person person)  {
+		public PersonVO update(@RequestBody PersonVO person)  {
 			return service.update(person);
 //		
 	}
